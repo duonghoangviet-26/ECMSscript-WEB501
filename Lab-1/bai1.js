@@ -13,17 +13,17 @@ function calculateBMI(weight, height) {
     // - Trên 30: Béo phì
 
     const BMI = weight / (height * height);
-    let message = "";
+    let result = "";
     if (BMI < 18.5) {
-        message = `Chỉ số BMI của bạn là ${BMI}. Bạn đang thiếu cân.`;
+        result = `Chỉ số BMI của bạn là ${BMI}. Bạn đang thiếu cân.`;
     } else if (BMI > 18.5 && BMI <= 24.9) {
-        message = `Chỉ số BMI của bạn là ${BMI}. Bạn đang Bình thường.`;
+        result = `Chỉ số BMI của bạn là ${BMI}. Bạn đang Bình thường.`;
     } else if (BMI > 25 && BMI <= 29.9) {
-        message = `Chỉ số BMI của bạn là ${BMI}. Bạn đang Thừa cân.`;
+        result = `Chỉ số BMI của bạn là ${BMI}. Bạn đang Thừa cân.`;
     } else if (BMI > 30) {
-        message = `Chỉ số BMI của bạn là ${BMI}. Bạn đang Béo phì.`;
+        result = `Chỉ số BMI của bạn là ${BMI}. Bạn đang Béo phì.`;
     }
-    return message;
+    return result;
 }
 
 // Ví dụ sử dụng
