@@ -28,12 +28,12 @@
 // Bài 1: Sửa lỗi scope
 
 // Sửa đoạn code sau để hoạt động đúng
-// for (let i = 0; i < 3; i++) {
-//     setTimeout(function () {
+for (let i = 0; i < 3; i++) {
+    setTimeout(function () {
 
-//         console.log(i); // Hiện tại in ra 3,3,3
-//     }, 100);
-// }
+        console.log(i); // Hiện tại in ra 3,3,3
+    }, 100);
+}
 // Yêu cầu: Sửa để in ra 0,1,2
 
 
@@ -42,17 +42,21 @@
 // Bài 2:
 // Tạo một object student với const
 // Thêm thuộc tính điểm và in ra
-// const student = {
-//     name: "ThuyTien",
-//     age: 21,
-//     grade: "A"
-// };
-// console.log(JSON.stringify(student));
+const student = {
+    name: "ThuyTien",
+    age: 19,
+};
+
 
 // Thực hiện các thao tác sau:
 // 1. Thêm thuộc tính grade với giá trị "A"
 // 2. Thay đổi tuổi thành 21
 // 3. In ra toàn bộ thông tin student
+
+student.age = 21;
+student.grade = "A";
+
+console.log((student));
 
 
 
@@ -64,36 +68,50 @@
 // Bài 1: Tạo email template
 
 // Tạo template cho email thông báo
-// const user = {
-//     firstName: "Nguyen",
-//     lastName: "Van A",
-//     product: "Laptop Dell XPS",
-//     price: 25000000,
-//     orderDate: "2024-01-15",
-// };
+const user = {
+    firstName: "Nguyen",
+    lastName: "Van A",
+    product: "Laptop Dell XPS",
+    price: 25000000,
+    orderDate: "2024-01-15",
+};
 
 // Tạo template string cho email
-// const emailTemplate = `Xin chào bạn ${user.firstName} ${user.lastName} cảm ơn bạn đã mua ${user.product} và giá ${user.price} vào ngày ${user.orderDate}`; // Viết template ở đây
+const emailTemplate = `
+        Xin chào bạn ${user.firstName} ${user.lastName} 
+    
+    Cảm ơn bạn đã mua sản phẩm ${user.product} 
+    Với giá  là ${user.price} vào ngày ${user.orderDate}
 
-// console.log(emailTemplate);
+        Cảm ơn bạn đã mua hàng bên Shop . Xin chào và hẹn gặp lại bạn!
+    `; // Viết template ở đây
+
+console.log(emailTemplate);
 
 // Bài 2: Tạo HTML template
 
 // Tạo HTML template cho card sản phẩm
-// const product = {
-//     name: "iPhone 15",
-//     price: 20000000,
-//     discount: 10,
-//     inStock: true,
-// };
+const product = {
+    name: "iPhone 15",
+    price: 20000000,
+    discount: 10,
+    inStock: true,
+};
 
 // // Tính giá sau giảm
-// const finalPrice = product.price * (1 - product.discount / 100);
+const finalPrice = product.price * (1 - product.discount / 100);
 
 // // Tạo template HTML
-// const productCard = `Cảm ơn bạn đã mua ${product.name} với giá ${product.price} và được giảm giá ${product.discount} giá còn lại là  ${finalPrice} `; // Viết template ở đây
+const productCard = `
+            Cảm ơn bạn đã mua sản phẩm  ${product.name} 
 
-// console.log(productCard);
+    Với giá ${product.price} và được giảm giá ${product.discount}
+    Giá còn lại bạn phải trả sau khi giảm giá là  ${finalPrice} 
+    
+      Cảm ơn bạn đã mua hàng bên Shop . Xin chào và hẹn gặp lại bạn! `
+    ; // Viết template ở đây
+
+console.log(productCard);
 
 
 // 3. Enhanced Object Literals
