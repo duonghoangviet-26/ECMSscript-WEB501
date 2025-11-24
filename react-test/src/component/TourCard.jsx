@@ -12,12 +12,12 @@ function TourCard(props) {
                 <div className="w-full h-64 rounded-lg overflow-hidden">
                     <img
                         src={props.image}
-                        alt={props.title}
+                        alt={props.name}
                     />
                 </div>
 
                 <div className="text-center mt-4">
-                    <p className="font-semibold text-lg text-gray-800 ">{props.title}</p>
+                    <p className="font-semibold text-lg text-gray-800 ">{props.name}</p>
                     <h3 className="text-red-600 font-bold text-xl mt-2">{props.price}</h3>
                 </div>
 

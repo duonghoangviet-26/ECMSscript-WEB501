@@ -31,13 +31,6 @@ console.log(calculateBMI(76, 1.70)); // "BMI: 22.86 - Phân loại: Bình thư�
 
 
 
-
-
-
-
-
-
-
 // Bài tập 2: Enhanced Object Literals
 // Yêu cầu:
 // Tạo đối tượng quản lý sách sử dụng enhanced object literals.
@@ -68,4 +61,3 @@ function createBook(title, author, year, price) {
 const book = createBook("JavaScript ES6", "John Doe", 2023, 200000);
 console.log(book.getBookInfo());
 console.log(book.calculateDiscount(10)); // Giảm 10%
-
