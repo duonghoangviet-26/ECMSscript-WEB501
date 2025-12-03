@@ -12,15 +12,17 @@ function LoginPage() {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post(`http://localhost:3000/login`, {
+            const { data } = await axios.post(`http://localhost:3000/login`, {
                 email,
                 password,
             });
-            if (res.data.token) {
-                localStorage.setItem("token", res.data.token);
+            console.log(data);
+
+            if (data.accessToken) {
+                localStorage.setItem("token", data.accessToken);
+                toast.success("Đăng Nhập thành công");
+                navigate("/list");
             }
-            toast.success("Đăng Nhập thành công");
-            navigate("/list");
         } catch (error) {
             toast.error("Lỗi");
         }

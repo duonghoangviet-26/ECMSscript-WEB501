@@ -12,13 +12,10 @@ function RegisterPage() {
     const handleRigester = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post(`http://localhost:3000/register`, {
+            const { data } = await axios.post(`http://localhost:3000/register`, {
                 email,
                 password,
             });
-            // if (res.data.token) {
-            //     localStorage.setItem("token", res.data.token);
-            // }
             toast.success("Đăng Ký thành công");
             navigate("/login");
         } catch (error) {
