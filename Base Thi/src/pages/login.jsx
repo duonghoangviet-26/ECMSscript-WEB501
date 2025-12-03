@@ -16,7 +16,7 @@ function LoginPage() {
                 email,
                 password,
             });
-            console.log(data);
+            // console.log(data);
 
             if (data.accessToken) {
                 localStorage.setItem("token", data.accessToken);
@@ -42,7 +42,7 @@ function LoginPage() {
                         name="email"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
-                        type="text"
+                        type="email"
                         className="w-full border rounded-lg px-3 py-2"
                     />
                 </div>

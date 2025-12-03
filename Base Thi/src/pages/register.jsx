@@ -20,7 +20,6 @@ function RegisterPage() {
             navigate("/login");
         } catch (error) {
             toast.error("Lỗi");
-            console.log(error);
         }
 
     }
@@ -38,7 +37,7 @@ function RegisterPage() {
                         name="email"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
-                        type="text"
+                        type="email"
                         className="w-full border rounded-lg px-3 py-2"
                     />
                 </div>
