@@ -1,12 +1,10 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
-import { Navigate } from "react-router-dom";
 
 function EditPage() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [destination, setDestination] = useState("");
   const [duration, setDuration] = useState("");
@@ -14,29 +12,67 @@ function EditPage() {
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
   const [available, setAvailable] = useState("");
+  const [active, setActive] = useState("");
+
+
 
   useEffect(() => {
     const getTour = async () => {
-      try {
-        const { data } = await axios.get(`http://localhost:3000/tours/${id}`);
-        setName(data.name);
-        setDestination(data.destination);
-        setDuration(data.duration);
-        setPrice(data.price);
-        setImage(data.image);
-        setDescription(data.description);
-        setAvailable(data.available);
-      } catch (error) {
-        toast.error("Không tải được dữ liệu!");
-        console.error(error);
-      }
-    };
-
+      const { data } = await axios.get(`http://localhost:3000/tours/${id}`);
+      setName(data.name);
+      setDestination(data.destination);
+      setDuration(data.duration);
+      setPrice(data.price);
+      setImage(data.image);
+      setDescription(data.description);
+      setAvailable(data.available);
+      setActive(data.active);
+    }
     getTour();
-  }, [id]);
+  }, [id])
+
+
+  const HandleValidate = () => {
+    let message = '';
+    if (!name || !description || !price || !image || !destination || !duration || available === "" || active === "") {
+      message = "Bạn cần nhập đầy đủ thông tin";
+      return message;
+    }
+
+    if (name.length < 5 || name.length > 100) {
+      message = "Name phải từ 5 đến 100 ký tự";
+      return message;
+    }
+
+    const urlRegex = /^(https?:\/\/.+)/;
+    if (!urlRegex.test(image)) {
+      message = "URL ảnh không hợp lệ";
+      return message;
+    }
+
+    if (Number(price) <= 0) {
+      message = "Giá phải lớn hơn 0";
+      return message;
+    }
+
+    return message;
+  };
+
+
+  // chuyển hướng giữa các trang 
+  const navigate = useNavigate();
+
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const message = HandleValidate();
+    if (message) {
+      toast.error(message);
+      return;
+    }
     try {
       await axios.put(`http://localhost:3000/tours/${id}`, {
         name,
@@ -46,17 +82,23 @@ function EditPage() {
         image,
         description,
         available: Number(available),
+        active: active === "true",
       });
-      toast.success("Cập nhật thành công!");
+      toast.success('Thêm thành công');
       navigate("/list");
     } catch (error) {
-      toast.error("Lỗi khi cập nhật!");
+      toast.error(error.message);
+      console.log(error);
+
     }
-  };
+
+  }
+
 
   return (
-    <div>
-      <h1>Sửa Tour</h1>
+    <div className="p-6">
+      <h1 className="text-2xl font-semibold mb-6">Thêm mới Tour</h1>
+
       <form className="space-y-6" onSubmit={handleSubmit}>
 
         {/* NAME */}
@@ -135,6 +177,18 @@ function EditPage() {
             className="w-full border rounded-lg px-3 py-2"
           />
         </div>
+        <div>
+          <label className="block font-medium mb-1">Trạng thái</label>
+          <select name="active"
+            value={active}
+            onChange={e => setActive(e.target.value)}
+            className="w-full border rounded-lg px-3 py-2">
+            <option value="">-Chọn</option>
+            <option value="true">True</option>
+            <option value="false">False</option>
+
+          </select>
+        </div>
 
         <button
           type="submit"
@@ -143,9 +197,9 @@ function EditPage() {
           Thêm mới
         </button>
 
-      </form>
-    </div>
-  )
+      </form >
+    </div >
+  );
 }
 
 export default EditPage;

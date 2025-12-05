@@ -11,6 +11,11 @@ function LoginPage() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+
+        if (!email || !password) {
+            toast.error('Vui lòng nhập đầy đủ thông tin')
+            return;
+        }
         try {
             const { data } = await axios.post(`http://localhost:3000/login`, {
                 email,
@@ -24,7 +29,7 @@ function LoginPage() {
                 navigate("/list");
             }
         } catch (error) {
-            toast.error("Lỗi");
+            toast.error("Sai mật khẩu");
         }
 
     }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function AddPage() {
 
@@ -11,28 +12,66 @@ function AddPage() {
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
   const [available, setAvailable] = useState("");
+  const [active, setActive] = useState("");
+
+
+  const HandleValidate = () => {
+    let message = '';
+    if (!name || !description || !price || !image || !destination || !duration || available === "" || active === "") {
+      message = "Bạn cần nhập đầy đủ thông tin";
+      return message;
+    }
+
+    if (name.length < 5 || name.length > 100) {
+      message = "Name phải từ 5 đến 100 ký tự";
+      return message;
+    }
+
+    const urlRegex = /^(https?:\/\/.+)/;
+    if (!urlRegex.test(image)) {
+      message = "URL ảnh không hợp lệ";
+      return message;
+    }
+
+    if (Number(price) <= 0) {
+      message = "Giá phải lớn hơn 0";
+      return message;
+    }
+
+    return message;
+  };
+
 
   // chuyển hướng giữa các trang 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newTour = {
-      name,
-      destination,
-      duration,
-      price: Number(price),
-      image,
-      description,
-      available: Number(available)
-    };
+    const message = HandleValidate();
+    if (message) {
+      toast.error(message);
+      return;
+    }
+
+
     try {
-      axios.post(`http://localhost:3000/tours`, newTour);
-      alert("Thêm mới thành công");
+      await axios.post(`http://localhost:3000/tours`, {
+        name,
+        destination,
+        duration,
+        price: Number(price),
+        image,
+        description,
+        available: Number(available),
+        active: active === "true",
+      });
+      toast.success('Thêm thành công');
       navigate("/list");
     } catch (error) {
+      toast.error(error.message);
       console.log(error);
+
     }
 
   }
@@ -120,6 +159,18 @@ function AddPage() {
             className="w-full border rounded-lg px-3 py-2"
           />
         </div>
+        <div>
+          <label className="block font-medium mb-1">Trạng thái</label>
+          <select name="active"
+            value={active}
+            onChange={e => setActive(e.target.value)}
+            className="w-full border rounded-lg px-3 py-2">
+            <option value="">-Chọn</option>
+            <option value="true">True</option>
+            <option value="false">False</option>
+
+          </select>
+        </div>
 
         <button
           type="submit"
@@ -128,8 +179,8 @@ function AddPage() {
           Thêm mới
         </button>
 
-      </form>
-    </div>
+      </form >
+    </div >
   );
 }
 

@@ -11,6 +11,22 @@ function RegisterPage() {
 
     const handleRigester = async (e) => {
         e.preventDefault();
+        if (!email || !password) {
+            toast.error('Vui lòng nhập đầy đủ thông tin');
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            toast.error("Email không hợp lệ");
+            return;
+        }
+
+        if (password.length < 6) {
+            toast.error("Mật khẩu phải từ 6 ký tự trở lên");
+            return;
+        }
+
         try {
             const { data } = await axios.post(`http://localhost:3000/register`, {
                 email,

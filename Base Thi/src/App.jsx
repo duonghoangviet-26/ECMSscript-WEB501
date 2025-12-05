@@ -1,17 +1,22 @@
 import { Toaster } from "react-hot-toast";
 import { useState } from "react";
-import { Routes } from "react-router-dom";
+import { Link, Routes } from "react-router-dom";
 import { Route } from "react-router-dom";
-import List from "./pages/List";
-import Add from "./pages/Add";
-import Layout from "./pages/Layout";
+import { Navigate } from "react-router-dom";
+import ListPage from "./pages/List";
+import AddPage from "./pages/Add";
+import LayoutPage from "./pages/Layout";
+import EditPage from "./pages/Edit";
+import RegisterPage from "./pages/register";
+import LoginPage from "./pages/login";
+import AdminLayout from "./layout/AdminLayout";
+import Logout from "./pages/logout";
 
 function App() {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      {/* HEADER - Navbar Tailwind */}
       <nav className="bg-blue-600 text-white shadow">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           {/* Brand */}
@@ -22,25 +27,28 @@ function App() {
 
           {/* Menu desktop */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="/" className="hover:text-gray-200">
+            <Link to="/" className="hover:text-gray-200">
               Trang chủ
-            </a>
-            <a href="List" className="hover:text-gray-200">
+            </Link>
+            <Link to="list" className="hover:text-gray-200">
               Danh sách
-            </a>
-            <a href="Add" className="hover:text-gray-200">
+            </Link>
+            <Link to="add" className="hover:text-gray-200">
               Thêm mới
-            </a>
+            </Link>
           </div>
 
           {/* Right menu desktop */}
           <div className="hidden md:flex items-center space-x-6">
-            <a href="#" className="hover:text-gray-200">
+            <Link to="login" className="hover:text-gray-200">
               Đăng nhập
-            </a>
-            <a href="#" className="hover:text-gray-200">
+            </Link>
+            <Link to="register" className="hover:text-gray-200">
               Đăng ký
-            </a>
+            </Link>
+            <Link to="logout" className="hover:text-gray-200">
+              Đăng xuất
+            </Link>
           </div>
         </div>
 
@@ -48,15 +56,22 @@ function App() {
 
       {/* MAIN CONTENT */}
       <div className="max-w-6xl mx-auto mt-10 px-4 text-center">
-        <h1 className="text-4xl font-bold mb-4">Chào mừng đến với WEB501</h1>
-        <p className="text-lg text-gray-600">Ứng dụng quản lý dữ liệu</p>
+        {/* <h1 className="text-4xl font-bold mb-4">Chào mừng đến với WEB501</h1>
+        <p className="text-lg text-gray-600">Ứng dụng quản lý dữ liệu</p> */}
+
         <Routes>
-          <Route path="/List" element={<List />} />
-          <Route path="/Add" element={<Add />} />
+          <Route element={<AdminLayout />} >
+            <Route path="/list" element={<ListPage />} />
+            <Route path="/add" element={<AddPage />} />
+            <Route path="/edit/:id" element={<EditPage />} />
+          </Route>
+
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/logout" element={<Logout />} />
+
         </Routes>
-
-      </div>
-
+      </div >
       <Toaster />
     </>
   );

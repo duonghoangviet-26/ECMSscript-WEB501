@@ -1,7 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
 import { useState } from "react";
 
-function Layout() {
+function LayoutPage() {
   const [open, setOpen] = useState(false);
 
   return (
@@ -94,4 +94,4 @@ function Layout() {
   );
 }
 
-export default Layout;
+export default LayoutPage;
