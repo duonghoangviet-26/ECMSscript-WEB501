@@ -1,0 +1,47 @@
+{
+  "students": [
+    {
+      "name": "Phùng Văn Duy aa",
+      "age": 20,
+      "subject": "Toán cao cấp",
+      "major": "Mobie",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "name": "Tran Thi B",
+      "age": 22,
+      "subject": "Lập trình Java",
+      "major": "BE"
+    },
+    {
+      "name": "Nam",
+      "age": "19",
+      "subject": "Toán cao cấp",
+      "major": "FE",
+      "id": 8
+    },
+    {
+      "name": "Duong",
+      "age": "12",
+      "subject": "222",
+      "major": "BE",
+      "id": 9
+    },
+    {
+      "name": "Hoàng Việt Dương aaa",
+      "age": "12",
+      "subject": "font family ",
+      "major": "Mobie",
+      "id": 10
+    },
+    {
+      "name": "aaaaa",
+      "age": "3",
+      "subject": "12",
+      "major": "FE",
+      "id": 11
+    }
+  ],
+  "users": []
+}

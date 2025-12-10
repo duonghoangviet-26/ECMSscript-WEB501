@@ -38,6 +38,11 @@ function AddPage() {
       return message;
     }
 
+    if (Number(available) < 0) {
+      message = "Available Không được bé hơn 0 ";
+      return message;
+    }
+
     return message;
   };
 
@@ -53,7 +58,6 @@ function AddPage() {
       toast.error(message);
       return;
     }
-
 
     try {
       await axios.post(`http://localhost:3000/tours`, {
@@ -73,7 +77,6 @@ function AddPage() {
       console.log(error);
 
     }
-
   }
 
 
@@ -83,7 +86,6 @@ function AddPage() {
 
       <form className="space-y-6" onSubmit={handleSubmit}>
 
-        {/* NAME */}
         <div>
           <label className="block font-medium mb-1">Name</label>
           <input
